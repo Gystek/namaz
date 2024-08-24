@@ -1,0 +1,38 @@
+=encoding utf8
+
+=head1 namaz
+
+C<namaz> is a simple Perl script to calculate local namaz times using
+mathematical formulae.
+
+=head2 Installing
+
+Use C<install>:
+
+	$ install -m 755 -T namaz.pl /usr/bin/namaz
+
+=head2 TODO
+
+=over
+
+=item -
+Add new languages
+
+=item -
+Make prayer times accurate in higher latitudes
+
+=back
+
+=head2 Credits
+
+The formulae to calculate prayer times were taken from @RadhiFadlillah's
+L<website|https://radhifadlillah.com/blog/2020-09-06-calculating-prayer-times>.
+
+=head2 License
+
+C<namaz> is licensed under the GNU General Public License version
+2.0 ONLY.
+
+The full text of the licence can be accessed via L<this link|https://gnu.org/licenses/old-licenses/gpl-2.0.txt>
+and is also included in the L<licence file|./COPYING> of this software
+package.
