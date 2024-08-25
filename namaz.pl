@@ -1,6 +1,8 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+use utf8;
+use open ':std', ':encoding(UTF-8)';
 use Getopt::Long::Descriptive;
 use Math::Trig;
 use Time::Local;
@@ -35,7 +37,16 @@ my $longitude = $opt->lng  + 0;
 my $altitude  = $opt->alt  + 0;
 
 my %timing_names = (
-	lat	=>	[ 'Fajr', 'Shuruq', 'Zuhr', 'Asr', 'Maghrib', 'Isha' ]
+	lat	=>	[ "Fajr", "Shuruq", "Zuhr", "Asr", "Maghrib", "Isha" ],
+	tur	=>	[ "İmsak", "Sabah", "Öğle", "İkindi", "Akşam", "Yatsı" ],
+	pol	=>	[ "Świt", "Wschód", "Południe", "Popołudnie", "Zachód", "Zmierzch" ],
+	prs	=>      [ "صبح", "طلوع", "ظهر", "عصر", "مغرب", "عشا" ],
+	rus	=>	[ "Рассвет", "Восход", "Полдень", "Пополудни", "Заход", "Сумерки" ] ,
+	zlm	=>	[ "Subuh", "Matahari terbit", "Zohor", "Asar", "Maghrib", "Isyak" ],
+	urd	=>	[ "فجر", "طلوع", "ظهر", "عصر", "مغرب", "عشا" ],
+	pnb	=> 	[ "سرگی", "دن چڑھنا", "پیشی", "ڈیگر", "نماشاں", "کفتاں" ],
+	pus	=> 	[ "سبايي", "لمرڅرک", "ماسپښين", "مازدیګر", "ماښام", , "ماسختن" ],
+	eng	=>      [ "Dawn", "Sunrise", "Noon", "Afternoon", "Sunset", "Dusk" ],
 );
 
 my @t = localtime(time);
@@ -100,7 +111,7 @@ for (my $i = 0; $i < 6; $i++) {
 	print_center($name, $widths->[$i]);
 
 	if (($i + 1) % 6 != 0) {
-		printf "\t";
+		printf "    ";
 	} else {
 		printf "\n";
 	}
@@ -123,7 +134,7 @@ for (my $i = 0; $i < 6; $i++) {
 	print_center($time, $widths->[$i]);
 
 	if (($i + 1) % 6 != 0) {
-		printf "\t";
+		printf "    ";
 	} else {
 		printf "\n";
 	}
@@ -157,8 +168,10 @@ sub hour2text {
 sub print_center {
 	my ($text, $width) = @_;
 
-	my $pad = (($width - length($text)) / 2);
-	$pad = ($pad > 0) ? $pad : 0;
+	my $l     = length($text);
+	my $space = abs($width - $l);
 
-	printf "%*s%s%*s", $pad, "", $text, $pad, "";
+	my $pad = int($space / 2);
+
+	printf "%*s%s%*s", $width - $pad - $l, "", $text, $pad, "";
 }
