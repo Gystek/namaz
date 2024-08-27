@@ -58,6 +58,9 @@ my $offset = $offset_hours * 100 + $offset_minutes;
 
 # Credit to 'https://radhifadlillah.com/blog/2020-09-06-calculating-prayer-times/' for the formulae
 my $d = localtime;
+$d = $d->truncate(to => 'day');
+$d = $d + 43200;
+
 my $jd = $d->julian_day;
 my $u = ($jd - 2451545) / 365.25;
 my $th = 2 * pi * $u;
