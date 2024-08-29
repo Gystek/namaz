@@ -57,7 +57,8 @@ my $offset_hours = $offset_seconds / 3600;
 my $offset = $offset_hours * 100 + $offset_minutes;
 
 # Credit to 'https://radhifadlillah.com/blog/2020-09-06-calculating-prayer-times/' for the formulae
-my $d = localtime;
+my $d_now = localtime;
+my $d = $d_now;
 $d = $d->truncate(to => 'day');
 $d = $d + 43200;
 
@@ -92,7 +93,7 @@ my $asr     = $tran + alt2h($alt_asr) / 15;
 my $maghrib = $tran + alt2h($alt_maghrib) / 15;
 my $isha    = $tran + alt2h($alt_isha) / 15;
 
-my $cur_h = $d->hour + $d->minute / 60;
+my $cur_h = $d_now->hour + $d_now->minute / 60;
 
 my @times_h = ($fajr, $shuruq, $zuhr, $asr, $maghrib, $isha);
 my @times   = map { hour2text($_) } @times_h;
